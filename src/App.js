@@ -1,9 +1,5 @@
 import React, { Component } from 'react'
-import {
-  BrowserRouter as Router,
-  Link,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom'
 import topics from './data/topics'
 
 class App extends Component {
