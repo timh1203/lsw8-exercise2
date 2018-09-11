@@ -14,10 +14,35 @@ class App extends Component {
       )
     }
 
-    const Topic = ({ match }) => {
+    const Resources = ({ match }) => {
       return (
         <div>
-          <h1>Topic</h1>
+          <h1>Resources</h1>
+        </div>
+      )
+    }
+
+    const Topic = ({ match }) => {
+      console.log(match.params.topicId)
+      const topic = topics.find(({ id }) => id === match.params.topicId)
+
+      return (
+        <div>
+          <h1>{topic.name}</h1>
+          <h2>{topic.description}</h2>
+          <ul>
+            {topic.resources.map(topic => {
+              return (
+                <li key={topic.id}>
+                  <Link to={`${match.url}/${topic.id}`}>{topic.name}</Link>
+                </li>
+              )
+            })}
+          </ul>
+
+          <hr />
+
+          <Route path={`${match.path}/:subId`} component={Resources} />
         </div>
       )
     }
