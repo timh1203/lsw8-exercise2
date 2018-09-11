@@ -14,16 +14,20 @@ class App extends Component {
       )
     }
 
-    const Resources = ({ match }) => {
+    const Resource = ({ match }) => {
+      const resource = topics.find(({ id }) => id === match.params.topicId)
+        .resources.find(({ id }) => id === match.params.subId)
+
       return (
         <div>
-          <h1>Resources</h1>
+          <h3>{resource.name}</h3>
+          <p>{resource.description}</p>
+          <a href={resource.url}>More info.</a>
         </div>
       )
     }
 
     const Topic = ({ match }) => {
-      console.log(match.params.topicId)
       const topic = topics.find(({ id }) => id === match.params.topicId)
 
       return (
@@ -42,7 +46,7 @@ class App extends Component {
 
           <hr />
 
-          <Route path={`${match.path}/:subId`} component={Resources} />
+          <Route path={`${match.path}/:subId`} component={Resource} />
         </div>
       )
     }
