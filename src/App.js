@@ -4,6 +4,7 @@ import {
   Link,
   Route
 } from 'react-router-dom'
+import topics from './data/topics'
 
 class App extends Component {
   render() {
@@ -12,10 +13,33 @@ class App extends Component {
         <h1>HOME</h1>
       )
     }
-  
-    const Topics = () => {
+
+    const Topic = ({ match }) => {
       return (
-        <h1>TOPICS</h1>
+        <div>
+          <h1>Topic</h1>
+        </div>
+      )
+    }
+  
+    const Topics = ({ match }) => {
+      return (
+        <div>
+          <h1>TOPICS</h1>
+          <ul>
+            {topics.map(({ name, id }) => {
+              return (
+                <li key={id}>
+                  <Link to={`${match.url}/${id}`}>{name}</Link>
+                </li>
+              )
+            })}
+          </ul>
+
+          <hr />
+
+          <Route path={`${match.path}/:topicId`} component={Topic} />
+        </div>
       )
     }
 
